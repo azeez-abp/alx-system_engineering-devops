@@ -7,3 +7,6 @@ PERMISSION STATED
 7-everybody  add execute permision for all 
 scritp 7 8 9  changing the mod of hello
 10-mirror-permission copy the hello permission to olleh
+11-directory-permission change the subdiretory permission
+12-directory-permission create diretory and put permission on it
+13change_group Change group of hello file from hello to school with  chgrp school hello 
