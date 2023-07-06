@@ -6,3 +6,4 @@ PERMISSION STATED
 4-empty creat an empty fiel called hello
 7-everybody  add execute permision for all 
 scritp 7 8 9  changing the mod of hello
+10-mirror-permission copy the hello permission to olleh
