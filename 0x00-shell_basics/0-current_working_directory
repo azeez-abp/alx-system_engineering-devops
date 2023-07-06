@@ -1,3 +1,2 @@
 #!/bin/bash
 path=$(readlink -f ./0-current_working_directory)
-echo $path
