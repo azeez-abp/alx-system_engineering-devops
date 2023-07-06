@@ -1,0 +1,6 @@
+#!/bin/bash
+find ./*.html | while read -r file; do
+  if [[ ! -e "$file" && "$file" -nt "../$(basename "$file")" ]]; then
+    cp "$file" "../$(basename "$file")"
+  fi
+done
