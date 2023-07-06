@@ -10,3 +10,7 @@ scritp 7 8 9  changing the mod of hello
 11-directory-permission change the subdiretory permission
 12-directory-permission create diretory and put permission on it
 13change_group Change group of hello file from hello to school with  chgrp school hello 
+100-change_owner_and_group change owner to vincent  and group to staff 
+101-symbolic_link_permissions change user and groupe of symbolic link file _hello
+102-if_only condition change of file owner
+103-Star_Wars star-war episode iv display
