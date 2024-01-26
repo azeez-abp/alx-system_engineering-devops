@@ -2,7 +2,7 @@
 # This script INSERT DESCRIPTION HERE
 
 count=1
-while [$count]
+while [ $count ]
 do
  echo "I am alive!" >> /tmp/my_process
  sleep 2
