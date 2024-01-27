@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# describe the script
+# Manage process
+# start: will start the process
+# stop : will stop the process
+# restrt: will stop and start the process
 
 arg=$1
 
