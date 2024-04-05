@@ -1,0 +1,23 @@
+https://github.com/azeez-abp/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/0-simple_web_stack.png
+
+A server is a computer program or device that provides functionality or services to other computers, devices, or users on a network
+
+The domain name serves as a human-readable and memorable alias for the numeric IP address of a server or network resource on the Internet
+
+www. in www.foobar.com  is CNAME record
+
+A web server is responsible for handling HTTP requests from clients (typically web browsers) and serving web content in response
+
+An application server is responsible for executing business logic, processing data, and managing application operations in response to client requests. It provides an execution environment for running server-side applications, business processes, and middleware components. In nutshell application server is code executor
+
+A database server is responsible for storing, managing, and retrieving structured data efficiently
+
+Server use HTTP to communicate with client computer
+
+Issues with 
+SPOF:
+Single Point of Failure (SPOF): In this infrastructure, if there is only one web server hosting the website, it becomes a single point of failure. If the server experiences hardware failure, software crash, or any other issue, the entire website becomes inaccessible, leading to downtime and potential loss of revenue or reputation.
+
+Downtime During Maintenance: When maintenance or updates are required, such as deploying new code to the web server, the server needs to be restarted or taken offline temporarily. During this downtime, the website becomes inaccessible to users, resulting in potential disruption to services and negative impact on user experience
+
+Limited Scalability: With only one web server hosting the website, scalability becomes limited. If the website experiences a sudden surge in incoming traffic, such as during peak hours or due to a viral content, the single server may struggle to handle the load efficiently. This can lead to slow response times, degraded performance, and even server overload or crash, causing downtime and impacting user satisfaction.
