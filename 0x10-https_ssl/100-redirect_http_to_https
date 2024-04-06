@@ -2,16 +2,11 @@ global
         log /dev/log    local0
         log /dev/log    local1 notice
         chroot /var/lib/haproxy
-        stats socket /run/haproxy/admin.sock mode 660 level admin
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
         stats timeout 30s
         user haproxy
         group haproxy
         daemon
-
-        # Setting up SSL from tutorial
-        # https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-ubuntu-14-04
-        maxconn 2048
-        tune.ssl.default-dh-param 2048
 
         # Default SSL material locations
         ca-base /etc/ssl/certs
@@ -20,8 +15,14 @@ global
         # Default ciphers to use on SSL-enabled listening sockets.
         # For more information, see ciphers(1SSL). This list is from:
         #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
-        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS
+        # An alternative list with additional directives can be obtained from
+        #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
+        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
         ssl-default-bind-options no-sslv3
+        # custom SSL options
+        maxconn 2048
+        tune.ssl.default-dh-param 2048
+
 
 defaults
         log     global
@@ -38,38 +39,28 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
-        # Setting up SSL from tutorial
-        # https://www.digitalocean.com/community/tutorials/how-to-secure-haproxy-with-let-s-encrypt-on-ubuntu-14-04
+
+        #custom SSl options
         option forwardfor
         option http-server-close
 
-# Setting up SSL from tutorial
-
-frontend www-http
+frontend http_front
         bind *:80
-        reqadd X-Forwarded-Proto:\ http
-        default_backend www-backend
+        redirect scheme https code 301 if !{ ssl_fc }
+        option forceclose
 
 frontend www-https
-        bind *:443 ssl crt /etc/haproxy/certs/www.melissax.online.pem
-        reqadd X-Forwarded-Proto:\ https
-        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-        use_backend letsencrypt-backend if letsencrypt-acl
-        default_backend www-backend
+         bind *:443 ssl crt /etc/haproxy/certs/www.heindrickcheung.site.pem
+         reqadd X-Forwarded-Proto:\ https
+         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+         use_backend letsencrypt-backend if letsencrypt-acl
+         default_backend www-backend
 
 backend www-backend
+        redirect scheme https if !{ ssl_fc }
         balance roundrobin
-        redirect scheme https code 301 if !{ ssl_fc }
         server 482231-web-01 100.25.179.207:80 check
-        server 482231-web-02 52.207.194.31:80 check
+        server 404-web-02 34.73.31.23:80 check
 
 backend letsencrypt-backend
         server letsencrypt 127.0.0.1:54321
-
-#listen appname 0.0.0.0:80
-#       mode http
-#       balance roundrobin
-#       option httpclose
-#       option forwardfor
-#       server 338-web-01 35.229.54.225:80 check
-#       server 338-web-02 35.231.225.251:80 check
