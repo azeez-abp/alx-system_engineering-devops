@@ -1,18 +1,26 @@
-# MYSQL Intsall for version 5.7.
-- wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.38-linux-glibc2.12-x86_64.tar.gz
-- sudo tar -xzvf mysql-5.7.38-linux-glibc2.12-x86_64.tar.gz -C /usr/local/
-- sudo groupadd mysql
-- sudo useradd -r -g mysql -s /bin/false mysql
-- sudo cd /usr/local
-- sudo mv  mysql-5.7.38-linux-glibc2.12-x86_64 mysql
-- sudo cd mysql
-- sudo mkdir mysql-files
-- sudo chown mysql:mysql mysql-files
-- sudo chmod 750 mysql-files
-- sudo bin/mysqld --initialize --user=mysql
-- sudo bin/mysql_ssl_rsa_setup
-- sudo bin/mysqld_safe --user=mysql &
-- sudo  cp support-files/mysql.server /etc/init.d/mysql.server
-- sudo apt-get install libncurses5
-- export PATH=$PATH:/usr/local/mysql/bin
-- echo 'export PATH="$PATH:/usr/local/mysql/bin"' >> ~/.bashrc
+# MYSQL Intsall for version 5.7
+## This installtion will ask you
+- select vertion
+- - click the first select
+- - select version 5.7
+- - select ok
+- Set paswork
+```
+sudo kill -9 $(sudo ps aux | grep mysql | awk '{print  $2}')
+sudo rm /var/lib/dpkg/lock-frontend
+sudo apt-get remove --purge mysql-server mysql-client mysql-common -y && sudo apt-get autoremove -y
+
+sudo rm -rf /etc/apt/sources.list.d/mysql.list*
+    sudo rm -rf /var/lib/mysql-apt-config
+    sudo dpkg --purge mysql-apt-config
+
+dpkg -l | grep mysql
+sudo rm -rf /etc/mysql /var/lib/mysql
+cat /etc/apt/sources.list | grep mysql
+sudo apt update
+sudo apt clean
+sudo dpkg --configure -a
+
+sudo wget -O mysql57 https://raw.githubusercontent.com/nuuxcode/alx-system_engineering-devops/master/scripts/mysql57 && sudo chmod +x mysql57 &&  sudo ./mysql57
+```
+
