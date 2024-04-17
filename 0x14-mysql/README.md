@@ -1,6 +1,6 @@
 # MYSQL Intsall for version 5.7
 ## This installtion will ask you
-- select vertion
+- select version
 - - click the first select
 - - select version 5.7
 - - select ok
