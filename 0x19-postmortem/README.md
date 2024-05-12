@@ -1,7 +1,7 @@
 # Postmortem Report
 
 ## 404 Error while accessing a given URL
-
+![](./404.jpg)
 
 
 ### Incident report for [404 error / Site Not found](https://github.com/azeez-abp/alx-system_engineering-devops/blob/master/0x17-web_stack_debugging_3/0-strace_is_your_friend.pp)
