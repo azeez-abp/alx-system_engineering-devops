@@ -2,5 +2,5 @@
 #!/usr/bin/env bash
 
 # graceful reload
-gunicorn | -xargs kill -HUP
+gunicorn | xargs kill -HUP
 
